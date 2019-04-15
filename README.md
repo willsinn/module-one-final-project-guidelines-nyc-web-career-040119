@@ -1,3 +1,78 @@
+## One SWIMMER to many EVENTS
+## One EVENTS to many SWIMMERS
+
+## Many SWIMMERS to one swimmer_event
+## Many EVENTS to one swimmer_event
+
+
+
+
+
+
+
+### One SWIMMER to many EVENTS
+name
+age
+gender
+
+##Return Swimmer's Event and Record Swim
+      Return Swimmer
+As a SWIMMER entering my NAME, returns my AGE and GENDER =>
+      Return all Swimmer Events
+As a SWIMMER entering my NAME, returns ALL EVENTS that I have SWAM =>
+      Return all Swimmer Event Times
+As a SWIMMER entering my NAME and EVENT, returns an array of ALL my EVENT INSTANCES sorted ascending.=>
+      Return personal-best for Event
+As a SWIMMER entering my NAME and EVENT, returns my lowest TIME and DATE for that EVENT. =>
+
+STRETCH Return Charted Improvements.
+      Chart returned array (<time/date>: x, y) =>
+      Returns OVERALL FASTEST-TIME for that EVENT within that AGE & GENDER in text for comparison.
+
+
+## One EVENT to many SWIMMERS
+
+
+
+
+Return Event Times
+As a SWIMMER entering my NAME and specific EVENT, returns my lowest TIME + DATE that the EVENT was logged. =>
+Entering SWIMMER NAME, EVENT returns an array of ALL TIMES for that EVENT and sorts from fastest to slowest.
+
+
+
+
+
+
+
+
+##EVENT
+name
+
+gender
+
+
+
+
+##SWIMMER_EVENTS
+swimmer_id
+event_id
+swimmer_event_times
+event_name(swimmer_event_id
+)
+age
+
+
+GOAL
+
+
+STRETCH
+As a SWIMMER entering my NAME, AGE, GENDER and EVENT, returns the lowest TIME for that EVENT(AGE, GENDER)
+
+
+As a SWIMMER entering my NAME and EVENT, it should return my AGE, my GENDER, my LOWEST-TIME for that EVENT
+
+
 # Module One Final Project Guidelines
 
 Congratulations, you're at the end of module one! You've worked crazy hard to get here and have learned a ton.
