@@ -5,73 +5,46 @@
 ## Many EVENTS to one swimmer_event
 
 
+### AGGREGATE
 
+Swimmer Event--    STRETCH Return Charted Improvements.
+          Chart returned array (<time/date>: x, y) =>
+          Returns OVERALL FASTEST-TIME for that EVENT within that AGE & GENDER in text for comparison.
 
 
 
 
 ### One SWIMMER to many EVENTS
-name
-age
-gender
+name: of_swimmer
+age: of_swimmer
+gender: of_swimmer
+#How would I see all the Events I participated in and how would I see my fastest time?
+#Return Swimmer's Event and Record Swim
+       -As a SWIMMER entering my NAME, returns my AGE and GENDER =>
+       -As a SWIMMER entering my NAME, returns ALL EVENTS that I have SWAM =>
+       -As a SWIMMER entering my NAME and EVENT, returns an array of ALL my EVENT INSTANCES sorted ascending.=>
+       -As a SWIMMER entering my NAME and EVENT, returns my lowest TIME and DATE for that EVENT. => arr.first
 
-##Return Swimmer's Event and Record Swim
-      Return Swimmer
-As a SWIMMER entering my NAME, returns my AGE and GENDER =>
-      Return all Swimmer Events
-As a SWIMMER entering my NAME, returns ALL EVENTS that I have SWAM =>
-      Return all Swimmer Event Times
-As a SWIMMER entering my NAME and EVENT, returns an array of ALL my EVENT INSTANCES sorted ascending.=>
-      Return personal-best for Event
-As a SWIMMER entering my NAME and EVENT, returns my lowest TIME and DATE for that EVENT. =>
+        Stretch: As a SWIMMER entering my NAME, return ALL EVENTS participated AND their respective FASTEST TIMES.
 
-STRETCH Return Charted Improvements.
-      Chart returned array (<time/date>: x, y) =>
-      Returns OVERALL FASTEST-TIME for that EVENT within that AGE & GENDER in text for comparison.
+### One EVENT to many SWIMMERS
+name: of_event
+age: of_event
+gender: of_event
 
-
-## One EVENT to many SWIMMERS
-
-
-
-
-Return Event Times
-As a SWIMMER entering my NAME and specific EVENT, returns my lowest TIME + DATE that the EVENT was logged. =>
-Entering SWIMMER NAME, EVENT returns an array of ALL TIMES for that EVENT and sorts from fastest to slowest.
-
-
-
-
-
-
-
-
-##EVENT
-name
-
-gender
-
-
-
+#How to see all swimmers that have swam that unique Event and their rank.
+#Return ALL SWIMMER INSTANCES for that EVENT-AGE-GENDER.
+  -As a User entering an EVENT with AGE and GENDER, returns ALL INSTANCES of SWIMMERS respectively. =>
+  -As a User entering an EVENT with AGE and GENDER, returns a unique array that displays only the fastest of each SWIMMER. Sorts array ascending and displays data charted with EVENT-AGE-GENDER SWIMMER-EVENT TIME and DATE swum.
 
 ##SWIMMER_EVENTS
-swimmer_id
-event_id
-swimmer_event_times
-event_name(swimmer_event_id
-)
-age
+swimmer_id: swimmer
+event_id: event
+swimmer_event_times: time for that event
+event_name: swimmer_event_id
 
 
-GOAL
-
-
-STRETCH
-As a SWIMMER entering my NAME, AGE, GENDER and EVENT, returns the lowest TIME for that EVENT(AGE, GENDER)
-
-
-As a SWIMMER entering my NAME and EVENT, it should return my AGE, my GENDER, my LOWEST-TIME for that EVENT
-
+###date
 
 # Module One Final Project Guidelines
 
