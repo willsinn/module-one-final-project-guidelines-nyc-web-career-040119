@@ -49,13 +49,13 @@ event_name: swimmer_event_id
 ## Schema
 
 Event
-id | name | age(dob)
+id | name | age(dob) | gender
 
 SwimEventTime
 id | swimmer_id | event_id | time
 
 Swimmer
-id | name | age(dob)
+id | name | age(dob) | gender
 
 # Module One Final Project Guidelines
 

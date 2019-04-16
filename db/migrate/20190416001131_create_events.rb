@@ -6,5 +6,6 @@ class CreateEvents < ActiveRecord::Migration[5.0]
       t.boolean :gender
 
       t.timestamps
+    end
   end
 end
