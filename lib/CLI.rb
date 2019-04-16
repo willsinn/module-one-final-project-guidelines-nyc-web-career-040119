@@ -69,6 +69,15 @@ def change_swimmer_name(name, new_name)
 end
 
 
+def create_event
+  input = gets.chomp
+  name = input
+  input = gets.chomp
+  age = input
+  input = gets.chomp
+  gender = input
+  Event.find_or_create_by(name: name, age: age, gender: gender)
+end
 #  -As a SWIMMER entering my NAME, returns ALL EVENTS that I have SWAM =>
 #        -As a SWIMMER entering my NAME and EVENT, returns an array of ALL my EVENT INSTANCES sorted ascending.=>
 #        -As a SWIMMER entering my NAME and EVENT, returns my lowest TIME and DATE for that EVENT. => arr.first

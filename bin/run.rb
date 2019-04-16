@@ -1,7 +1,7 @@
 require_relative '../config/environment'
 
 #CREATE
-
+create_event()
 
 
 #READ
