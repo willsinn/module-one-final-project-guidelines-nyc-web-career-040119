@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190416140047) do
+ActiveRecord::Schema.define(version: 20190416170804) do
 
   create_table "events", force: :cascade do |t|
     t.string  "name"
@@ -19,8 +19,8 @@ ActiveRecord::Schema.define(version: 20190416140047) do
   end
 
   create_table "swim_event_times", force: :cascade do |t|
-    t.integer "swimmer_id"
     t.integer "event_id"
+    t.integer "swimmer_id"
     t.integer "time"
   end
 
