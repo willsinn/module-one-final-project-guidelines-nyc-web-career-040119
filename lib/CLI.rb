@@ -1,6 +1,6 @@
 ### Scrape Website and load db
 
-
+ #helper
 
 ###How would I see all the Events I participated in and how would I see my fastest time?
 def search_by_swimmer_name
@@ -25,32 +25,47 @@ swimmers.find do |swimmer|
 
 
     input_yes = gets.chomp
-    if input_yes == 'y'
     swimmer_time = swimmer.swim_event_times.first
     swimmer_event = swimmer_time.event
 
     puts "Event: #{swimmer_event.name} Time: #{swimmer_time.time} seconds"
 
     end
-    else
+
   end
   swimmer #run next method
+  puts "Sorry! No Swimmers by that name, check your spelling and try again."
+
 end
-puts "Sorry! No Swimmers by that name, check your spelling and try again."
 #search_by_swimmer_name
 #loops, gotta create loop break
-end
+
 
 
 
 ##Return Swimmer's Event and Record Swim
-def change_swimmer_name(name)
-  swimmer = name
-  enum = Swimmer.all.find {|swimmer| swimmer.id }
+def get_params_for_name_update
+puts "Change display name?\n\n"
+puts "Input current name: "
+input = gets.chomp
+name = input
 
-  Swimmer.where(:unique_id => enum.id ).update_all(:name => "bob")
+puts "Input your new name:\n\n"
+new_input = gets.chomp
+new_name = new_input
 
-  binding.pry
+  if name == new_name
+    puts "New value is the same, try again."
+    get_params_for_name_update()
+  else
+    change_swimmer_name(name, new_name)
+  end
+end
+
+
+def change_swimmer_name(name, new_name)
+  swimmer = Swimmer.find_by(name: name)
+  swimmer.update(name: new_name)
 end
 
 
