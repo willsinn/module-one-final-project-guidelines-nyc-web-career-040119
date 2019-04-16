@@ -1,6 +1,13 @@
 ### Scrape
-puts "HELLO WORLD"
+def search_by_swimmer_name
+puts "Welcome to swim comparisons"
 
+puts "Enter your name to begin!"
+
+input = gets.chomp
+
+response = Swimmer.age.gender
+end
 # #How would I see all the Events I participated in and how would I see my fastest time?
 # #Return Swimmer's Event and Record Swim
 #        -As a SWIMMER entering my NAME, returns my AGE and GENDER =>

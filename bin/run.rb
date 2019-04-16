@@ -7,4 +7,4 @@ require_relative '../config/environment'
 ## Many EVENTS to one swimmer_event
 
 
-binding.pry
+#binding.pry
