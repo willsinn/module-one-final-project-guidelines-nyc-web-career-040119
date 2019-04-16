@@ -47,7 +47,9 @@ end
 def change_swimmer_name(name)
   swimmer = name
   enum = Swimmer.all.find {|swimmer| swimmer.id }
-  enum.id 
+
+  Swimmer.where(:unique_id => enum.id ).update_all(:name => "bob")
+
   binding.pry
 end
 
