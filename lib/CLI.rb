@@ -3,10 +3,19 @@ def search_by_swimmer_name
 
 puts "Welcome to swim comparisons"
 puts "Enter your name to begin!"
-search_value = gets.chomp
+search_name = gets.chomp
 
-return_value = Swimmer.all.find { |swimmer| swimmer.name == search_value }
-binding.pry
+swimmers = Swimmer.all
+swimmers.find do |swimmer|
+  swimmer.gender == true ? 'Male' : 'Female'  
+  if swimmer.name == search_name
+    puts "Result: "
+    puts "Name: #{swimmer.name} | Age: #{swimmer.age} | Gender: #{swimmer.gender} "
+    return
+  else
+    puts "Not Results"
+  end
+end
 end
 # #How would I see all the Events I participated in and how would I see my fastest time?
 # #Return Swimmer's Event and Record Swim
