@@ -3,23 +3,34 @@ def search_by_swimmer_name
 
 puts "Welcome to swim comparisons"
 puts "Enter your name to begin!"
-search_name = gets.chomp
+input_name = gets.chomp
 
 swimmers = Swimmer.all
 swimmers.find do |swimmer|
-  swimmer.gender == true ? 'Male' : 'Female'  
-  if swimmer.name == search_name
+
+  # Sad attempt to convert gender
+  # case swimmer.gender
+  # when true
+  #   gender = 'Male'
+  # else false
+  #   gender = 'Female'
+  # end
+  if swimmer.name == input_name
+    #        -As a SWIMMER entering my NAME, returns my AGE and GENDER =>
+
     puts "Result: "
     puts "Name: #{swimmer.name} | Age: #{swimmer.age} | Gender: #{swimmer.gender} "
-    return
+    puts "\n Not your desired results?"
+
   else
-    puts "Not Results"
   end
 end
+puts "Sorry! No Swimmers by that name, check your spelling and try again."
+#search_by_swimmer_name
+#loops, gotta create loop break
 end
 # #How would I see all the Events I participated in and how would I see my fastest time?
 # #Return Swimmer's Event and Record Swim
-#        -As a SWIMMER entering my NAME, returns my AGE and GENDER =>
 #        -As a SWIMMER entering my NAME, returns ALL EVENTS that I have SWAM =>
 #        -As a SWIMMER entering my NAME and EVENT, returns an array of ALL my EVENT INSTANCES sorted ascending.=>
 #        -As a SWIMMER entering my NAME and EVENT, returns my lowest TIME and DATE for that EVENT. => arr.first
