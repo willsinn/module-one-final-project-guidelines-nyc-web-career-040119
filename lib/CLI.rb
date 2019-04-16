@@ -78,6 +78,13 @@ def create_event
   gender = input
   Event.find_or_create_by(name: name, age: age, gender: gender)
 end
+
+def destroy_event
+  input = gets.chomp
+  name = input
+  target = Event.find_by(name: name)
+  target.destroy
+end
 #  -As a SWIMMER entering my NAME, returns ALL EVENTS that I have SWAM =>
 #        -As a SWIMMER entering my NAME and EVENT, returns an array of ALL my EVENT INSTANCES sorted ascending.=>
 #        -As a SWIMMER entering my NAME and EVENT, returns my lowest TIME and DATE for that EVENT. => arr.first
