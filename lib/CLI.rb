@@ -1,12 +1,12 @@
 ### Scrape
 def search_by_swimmer_name
+
 puts "Welcome to swim comparisons"
-
 puts "Enter your name to begin!"
+search_value = gets.chomp
 
-input = gets.chomp
+return_value = Swimmer.all.find { |swimmer| swimmer.name == search_value }
 binding.pry
-response = Swimmer.age.gender
 end
 # #How would I see all the Events I participated in and how would I see my fastest time?
 # #Return Swimmer's Event and Record Swim
