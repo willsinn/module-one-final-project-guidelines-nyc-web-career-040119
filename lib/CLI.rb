@@ -5,7 +5,7 @@ puts "Welcome to swim comparisons"
 puts "Enter your name to begin!"
 
 input = gets.chomp
-
+binding.pry
 response = Swimmer.age.gender
 end
 # #How would I see all the Events I participated in and how would I see my fastest time?
