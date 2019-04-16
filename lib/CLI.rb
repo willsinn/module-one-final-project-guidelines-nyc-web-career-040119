@@ -31,8 +31,8 @@ swimmers.find do |swimmer|
 
     puts "Event: #{swimmer_event.name} Time: #{swimmer_time.time} seconds"
 
-  end
-  else
+    end
+    else
   end
   swimmer #run next method
 end
@@ -44,10 +44,7 @@ end
 
 
 ##Return Swimmer's Event and Record Swim
-def return_swimmer_events
-  Swimmer.all = swimmers
-  events = Event.all
-
+def change_swimmer_name(name)
   binding.pry
 end
 
