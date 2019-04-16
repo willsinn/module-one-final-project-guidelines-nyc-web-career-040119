@@ -45,6 +45,9 @@ end
 
 ##Return Swimmer's Event and Record Swim
 def change_swimmer_name(name)
+  swimmer = name
+  enum = Swimmer.all.find {|swimmer| swimmer.id }
+  enum.id 
   binding.pry
 end
 
