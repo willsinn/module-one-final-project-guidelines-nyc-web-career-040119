@@ -15,18 +15,18 @@ def main_menu
   input = gets.chomp
   num = input.to_i
   case num
-  when 1 then search_by_swimmer_name()
-  when 2 then get_params_for_name_update()
-  when 3 then create_event()
-  when 4 then destroy_event()
+    when 1 then search_by_swimmer_name()
+    when 2 then get_params_for_name_update()
+    when 3 then create_event()
+    when 4 then destroy_event()
   else
     puts "Invalid entry."
   end
 end
 ###How would I see all the Events I participated in and how would I see my fastest time?
 def search_by_swimmer_name
-  puts "Welcome to swim comparisons"
-  puts "Enter your name to begin!"
+  puts "Search for swimmer by name:"
+  puts "\n"
   input = gets.chomp
   swimmers = Swimmer.all
   swimmers.find do |swimmer|
@@ -35,7 +35,7 @@ def search_by_swimmer_name
       puts "\n Name: #{swimmer.name} | Age: #{swimmer.age} | Gender: #{swimmer.gender_string} "
       swimmer_time = swimmer.swim_event_times.first
       swimmer_event = swimmer_time.event
-      puts " Event: #{swimmer_event.name} Time: #{swimmer_time.time} seconds"
+      puts " Event: #{swimmer_event.name} Time:#{swimmer_time.time_minutes}"
       else
         return
     end
@@ -62,6 +62,7 @@ def get_params_for_name_update
     change_swimmer_name(name, new_name)
   end
 end
+
 def change_swimmer_name(name, new_name)
   swimmer = Swimmer.find_by(name: name)
   swimmer.update(name: new_name)
