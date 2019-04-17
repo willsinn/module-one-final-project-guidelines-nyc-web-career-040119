@@ -1,36 +1,30 @@
 ### Scrape Website and load db
 
  #helper
-
 def input(value)
   value = self.input
   value
 end
-
 def main_menu
-
-  puts "Welcome to SwimDB"
-  
+  puts "Welcome to SwimDB\n"
+  puts "1. Search for an existing Swimmer"
+  puts "2. Update the name of an existing Swimmer"
+  puts "3. Create new Event"
+  puts "4. Delete existing Event"
+  puts "\n\n"
   input = gets.chomp
   num = input.to_i
   case num
-  when 1
-
-  when 2
-
-  when 3
-
-  when 4
-
-  when 5
+  when 1 then search_by_swimmer_name()
+  when 2 then get_params_for_name_update()
+  when 3 then create_event()
+  when 4 then destroy_event()
   else
     puts "Invalid entry."
   end
-
 end
-
 ###How would I see all the Events I participated in and how would I see my fastest time?
-def search_by_swimmer_name(swimmer)
+def search_by_swimmer_name
   puts "Welcome to swim comparisons"
   puts "Enter your name to begin!"
   input = gets.chomp
@@ -68,7 +62,6 @@ def get_params_for_name_update
     change_swimmer_name(name, new_name)
   end
 end
-
 def change_swimmer_name(name, new_name)
   swimmer = Swimmer.find_by(name: name)
   swimmer.update(name: new_name)
@@ -76,13 +69,11 @@ end
 
 
 def create_event
-
   name = gets.chomp
   age = gets.chomp
   gender = gets.chomp
   Event.find_or_create_by(name: name, age: age, gender: gender)
 end
-
 def destroy_event
   input = gets.chomp
   name = input
