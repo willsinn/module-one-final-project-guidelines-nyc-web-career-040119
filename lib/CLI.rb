@@ -6,10 +6,7 @@ def input(value)
   value = self.input
   value
 end
-def confirm_submission
-  print "press any key to confirm"
-  STDIN.getch
-end
+
 def search_again_helper
   puts "Search again? (y/n):"
   input = gets.chomp
@@ -124,58 +121,33 @@ def event_list
   end
   end
 
-def delete_event
-  event_swimmers = Event.find_by(id: 6)
-  if event_swimmers == event
-    puts "Awesome"
+def destroy_event_swimmer_check
+  puts "destroy target id:"
+  destroy_id = gets.chomp
+  bound_e_ids = SwimEventTime.all.map {|event_id| event_id.event_id}.uniq #array of event_ids w/ registered swimmers
+  bound_e_ids.find {|destroy_id| destroy_id } ? true : false #if
+
+  if true
+    puts "Event cannot be destroyed with swimmers registered.\nEnter another Event.id."
+    destroy_event_swimmer_check()
+  else false
+    destroy_event(destroy_id)
   end
 
 end
 
-   #
-   #    event.events
-   #   if event == event.swim_event_times
-   #   event_swimmers = event. {|swimmer| swimmer.swimmer.name }
-   # puts "#{event_swimmers}"
-   # event
-   #    end
-      #event.swim_event_times == undef
 
+###############################################################
+#DESTROY
 
-
-
-# end
-
-#    e_id = Event.first.id
-#   # e_swimmers = Event.first.swim_event_times
-#   Swimmer.find_by(id: e_id)
-#
-#   binding.pry
-#
-# Event.swim_event_times.find_all()
-#   counter = 1
-#   puts "Full Event List"
-#             Event.all.each do |event|
-#             event.swim_event_times.map |swimmers|
-#             # event.swim_event_times.all
-#             event_id = event.swim_event_times.swimmer_id
-#
-#             Event.find_by(id: swimmer_id)
-#
-#             event_participants.find_all do |event_participants|
-#             event_participants.swimmer.name
-#             end
-#            puts "#{counter}. #{event.id} #{event.name} #{event.age} #{event.gender} #{swimmers.swimmer.name} "
-#            counter += 1
-#          end
 def destroy_event
-  puts "target event for deletion: "
-  event_id = gets.chomp
-  target = Event.find_by(id: event_id)
-binding.pry
-   confirm_submission
-
+  target = Event.find_by(id: destroy_id)
+  confirm_destroy
   target.destroy
-  destroyed?(target)
   puts "Event: #{name} has been deleted."
+end
+
+def confirm_destroy
+  print "CONFIRM DESTROY?\nACTION MAY BE PERMANENT"
+  STDIN.getch
 end

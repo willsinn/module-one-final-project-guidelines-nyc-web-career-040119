@@ -1,7 +1,7 @@
 require_relative '../config/environment'
 #ActiveRecord::Base.logger = false
-event_list()
-#delete_event()
+#event_list()
+
 
 #main_menu()
 #search_by_swimmer_name()
@@ -20,4 +20,6 @@ event_list()
 
 
 #DESTROY
-#destroy_event()
+destroy_event_swimmer_check()
+
+# destroy_event()
