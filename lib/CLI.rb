@@ -106,7 +106,7 @@ def create_event
   puts "event gender group: "
   gender = gets.chomp
   Event.find_or_create_by(name: name, age: age, gender: gender)
-  puts "Congratulations! You've created Event: #{name}|#{age}|#{gender}\n "
+  puts "Congratulations! You've created Event: #{name} | #{age} | #{gender}\n "
 end
 
 def destroy_event
@@ -116,6 +116,7 @@ def destroy_event
   age = gets.chomp
   puts "target event gender: "
   gender = gets.chomp
+  puts "ARE YOU SURE? Changes may be permanent."
   target = Event.find_by(name: name, age: age, gender: gender)
   target.destroy
   puts "Event: #{name} has been deleted."
