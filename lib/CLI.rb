@@ -42,12 +42,12 @@ def main_menu
         puts "____________________\nCreate new swim event:"
         create_event()
     when 4
-        
+        puts "____________________\nDelete an EMPTY swim event:"
        destroy_event()
-  else
-    puts "Invalid entry."
-  end
-end
+     else
+       puts "Invalid entry."
+     end
+   end
 ###How would I see all the Events I participated in and how would I see my fastest time?
 def search_by_swimmer_name
   input = gets.chomp
@@ -110,8 +110,13 @@ def create_event
 end
 
 def destroy_event
-  input = gets.chomp
-  name = input
-  target = Event.find_by(name: name)
+  puts "target event name for deletion: "
+  name = gets.chomp
+  puts "target event age: "
+  age = gets.chomp
+  puts "target event gender: "
+  gender = gets.chomp
+  target = Event.find_by(name: name, age: age, gender: gender)
   target.destroy
+  puts "Event: #{name} has been deleted."
 end
