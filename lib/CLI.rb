@@ -1,15 +1,33 @@
 ### Scrape Website and load db
 
  #helper
-def main_menu
-
-end
 
 def input(value)
   value = self.input
   value
 end
 
+def main_menu
+
+  puts "Welcome to SwimDB"
+  
+  input = gets.chomp
+  num = input.to_i
+  case num
+  when 1
+
+  when 2
+
+  when 3
+
+  when 4
+
+  when 5
+  else
+    puts "Invalid entry."
+  end
+
+end
 
 ###How would I see all the Events I participated in and how would I see my fastest time?
 def search_by_swimmer_name(swimmer)
@@ -35,13 +53,13 @@ end
 
 ##Return Swimmer's Event and Record Swim
 def get_params_for_name_update
-puts "Change display name?\n\n"
-puts "Input current name: "
-input = gets.chomp
+  puts "Change display name?\n\n"
+  puts "Input current name: "
+  input = gets.chomp
 
-puts "Input your new name:\n\n"
-new_input = gets.chomp
-new_name = new_input
+  puts "Input your new name:\n\n"
+  new_input = gets.chomp
+  new_name = new_input
 
   if name == new_name
     puts "New value is the same, try again."
@@ -51,14 +69,13 @@ new_name = new_input
   end
 end
 
-
 def change_swimmer_name(name, new_name)
   swimmer = Swimmer.find_by(name: name)
   swimmer.update(name: new_name)
 end
 
 
-def create_event()
+def create_event
 
   name = gets.chomp
   age = gets.chomp
@@ -72,17 +89,3 @@ def destroy_event
   target = Event.find_by(name: name)
   target.destroy
 end
-#  -As a SWIMMER entering my NAME, returns ALL EVENTS that I have SWAM =>
-#        -As a SWIMMER entering my NAME and EVENT, returns an array of ALL my EVENT INSTANCES sorted ascending.=>
-#        -As a SWIMMER entering my NAME and EVENT, returns my lowest TIME and DATE for that EVENT. => arr.first
-
-#         Stretch: As a SWIMMER entering my NAME, return ALL EVENTS participated AND their respective FASTEST TIMES.
-
-# ### One EVENT to many SWIMMERS
-# name: of_event
-# age: of_event
-# gender: of_event
-# #How to see all swimmers that have swam that unique Event and their rank.
-# #Return ALL SWIMMER INSTANCES for that EVENT-AGE-GENDER.
-#   -As a User entering an EVENT with AGE and GENDER, returns ALL INSTANCES of SWIMMERS respectively. =>
-#   -As a User entering an EVENT with AGE and GENDER, returns a unique array that displays only the fastest of each SWIMMER. Sorts array ascending and displays data charted with EVENT-AGE-GENDER SWIMMER-EVENT TIME and DATE swum.

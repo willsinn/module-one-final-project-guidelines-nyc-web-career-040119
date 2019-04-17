@@ -1,11 +1,14 @@
 require_relative '../config/environment'
 
+
+
+
 #CREATE
 #create_event()
 
-
+main_menu()
 #READ
-search_by_swimmer_name('Robert')
+#search_by_swimmer_name()
 
 
 #UPDATE
