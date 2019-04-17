@@ -38,8 +38,12 @@ def main_menu
     when 2
         puts "____________________\nChange swimmer name:"
         get_params_for_name_update()
-    when 3 then create_event()
-    when 4 then destroy_event()
+    when 3
+        puts "____________________\nCreate new swim event:"
+        create_event()
+    when 4
+        
+       destroy_event()
   else
     puts "Invalid entry."
   end
@@ -68,8 +72,7 @@ end
 
 ##Return Swimmer's Event and Record Swim
 def get_params_for_name_update
-
-  puts "enter current name:"
+  puts "current name:"
   input = gets.chomp
   swimmers = Swimmer.all
   swimmers.find do |swimmer|
@@ -80,8 +83,7 @@ def get_params_for_name_update
         get_params_for_name_update()
       end
     end
-  puts ""
-  puts "enter new name:"
+  puts "\nenter new name:"
   new_input = gets.chomp
   if 'name' == 'new_name'
     puts "values are the same, try again."
@@ -96,13 +98,17 @@ def update_swimmer_name(name, new_name)
   swimmer.update(name: new_name)
 end
 
-
 def create_event
+  puts "new event name: "
   name = gets.chomp
+  puts "event age group: "
   age = gets.chomp
+  puts "event gender group: "
   gender = gets.chomp
   Event.find_or_create_by(name: name, age: age, gender: gender)
+  puts "Congratulations! You've created Event: #{name}|#{age}|#{gender}\n "
 end
+
 def destroy_event
   input = gets.chomp
   name = input
