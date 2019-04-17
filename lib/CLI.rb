@@ -1,13 +1,26 @@
 ### Scrape Website and load db
 
  #helper
+
 def input(value)
   # until input(value).to_a.include?("quit")
-
   value = self.input
   value
 end
-
+def search_again
+  puts "Search again? (y/n): "
+  input = gets.chomp
+  case input
+  when "y"
+    puts "yes"
+  when "n"
+    puts "no"
+  when "q"
+    puts "quit"
+  else
+    puts "Invalid Value"
+  end
+end
 def main_menu
   puts "Welcome to SwimDB\n"
   puts "1. Search for an existing Swimmer"
@@ -43,14 +56,13 @@ def search_by_swimmer_name
       puts "_______________________________________________________________________________________"
       puts "\t#{swimmer.name}\t \t#{swimmer.age}\t \t#{swimmer.gender_string}\t     #{swimmer_event.name}     #{swimmer_time.time_minutes}\t"
     end
+    search_again()
   end
-  puts "Search again? Input:(y/n)"
-    input = gets.chomp
-     input ? "y" : "n"
-     search_by_swimmer_name
+  puts "No swimmer by that name."
+  search_again()
+end
 
-    puts "No swimmer by that name, try again."
-    end
+
 
 
 #search_by_swimmer_name
