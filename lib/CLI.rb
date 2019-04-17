@@ -31,11 +31,12 @@ def search_by_swimmer_name
   swimmers = Swimmer.all
   swimmers.find do |swimmer|
     if swimmer.name == input
-      puts "Result: "
-      puts "\n Name: #{swimmer.name} | Age: #{swimmer.age} | Gender: #{swimmer.gender_string} "
       swimmer_time = swimmer.swim_event_times.first
       swimmer_event = swimmer_time.event
-      puts " Event: #{swimmer_event.name} Time:#{swimmer_time.time_minutes}"
+      puts "Result: "
+      puts "|\tName\t  |\tAge\t|\tGender\t  | \tEvent\t   |\tTime\t|"
+      puts "_______________________________________________________________________________________"
+      puts "\t#{swimmer.name}\t \t#{swimmer.age}\t \t#{swimmer.gender_string}\t     #{swimmer_event.name}     #{swimmer_time.time_minutes}\t"
       else
         return
     end
