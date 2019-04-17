@@ -1,6 +1,19 @@
 ### Scrape Website and load db
 
  #helper
+def main_menu
+
+end
+# def verify(params, input)
+#   binding.pry
+#   until params.include?(input)
+#     input = self.input
+#
+#     binding.pry
+#   end
+#   input
+#   binding.pry
+# end
 
 ###How would I see all the Events I participated in and how would I see my fastest time?
 def search_by_swimmer_name
@@ -24,7 +37,7 @@ swimmers.find do |swimmer|
     puts "\n Is this you?"
 
 
-    input_yes = gets.chomp
+    input = gets.chomp
     swimmer_time = swimmer.swim_event_times.first
     swimmer_event = swimmer_time.event
 
@@ -41,6 +54,10 @@ end
 #loops, gotta create loop break
 
 
+def input(value)
+  value = self.input
+  value
+end
 
 
 ##Return Swimmer's Event and Record Swim
@@ -69,13 +86,10 @@ def change_swimmer_name(name, new_name)
 end
 
 
-def create_event
-  input = gets.chomp
-  name = input
-  input = gets.chomp
-  age = input
-  input = gets.chomp
-  gender = input
+def create_event()
+  name = gets.chomp
+  age = gets.chomp
+  gender = gets.chomp
   Event.find_or_create_by(name: name, age: age, gender: gender)
 end
 

@@ -1,7 +1,7 @@
 require_relative '../config/environment'
 
 #CREATE
-#create_event()
+create_event()
 
 
 #READ
@@ -14,4 +14,7 @@ require_relative '../config/environment'
 
 
 #DESTROY
-destroy_event()
+#destroy_event()
+
+
+#verify(Event, name)
