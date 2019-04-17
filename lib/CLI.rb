@@ -16,7 +16,9 @@ def main_menu
   num = input.to_i
   case num
     when 1 then search_by_swimmer_name()
-    when 2 then get_params_for_name_update()
+    when 2
+        puts "Change Swimmer Name\n_____________________"
+        get_params_for_name_update()
     when 3 then create_event()
     when 4 then destroy_event()
   else
@@ -48,19 +50,26 @@ end
 
 ##Return Swimmer's Event and Record Swim
 def get_params_for_name_update
-  puts "Change display name?\n\n"
-  puts "Input current name: "
+
+  puts "enter current name:"
   input = gets.chomp
-
-  puts "Input your new name:\n\n"
+  swimmers = Swimmer.all
+  swimmers.find do |swimmer|
+      if swimmer.name == input
+        input
+      else
+        puts "no swimmer by that name, try again."
+        get_params_for_name_update()
+      end
+    end
+  puts ""
+  puts "enter new name:"
   new_input = gets.chomp
-  new_name = new_input
-
-  if name == new_name
-    puts "New value is the same, try again."
+  if 'name' == 'new_name'
+    puts "values are the same, try again."
     get_params_for_name_update()
   else
-    change_swimmer_name(name, new_name)
+    change_swimmer_name(input, new_input)
   end
 end
 
