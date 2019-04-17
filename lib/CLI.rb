@@ -4,55 +4,6 @@
 def main_menu
 
 end
-# def verify(params, input)
-#   binding.pry
-#   until params.include?(input)
-#     input = self.input
-#
-#     binding.pry
-#   end
-#   input
-#   binding.pry
-# end
-
-###How would I see all the Events I participated in and how would I see my fastest time?
-def search_by_swimmer_name
-#-As a SWIMMER entering my NAME, returns my AGE and GENDER =>
-puts "Welcome to swim comparisons"
-puts "Enter your name to begin!"
-input_name = gets.chomp
-
-swimmers = Swimmer.all
-swimmers.find do |swimmer|
-  # Sad attempt to convert gender
-  # case swimmer.gender
-  # when true
-  #   gender = 'Male'
-  # else false
-  #   gender = 'Female'
-  # end
-  if swimmer.name == input_name
-    puts "Result: "
-    puts "Name: #{swimmer.name} | Age: #{swimmer.age} | Gender: #{swimmer.gender_string} "
-    puts "\n Is this you?"
-
-
-    input = gets.chomp
-    swimmer_time = swimmer.swim_event_times.first
-    swimmer_event = swimmer_time.event
-
-    puts "Event: #{swimmer_event.name} Time: #{swimmer_time.time} seconds"
-
-    end
-
-  end
-  swimmer #run next method
-  puts "Sorry! No Swimmers by that name, check your spelling and try again."
-
-end
-#search_by_swimmer_name
-#loops, gotta create loop break
-
 
 def input(value)
   value = self.input
@@ -60,12 +11,33 @@ def input(value)
 end
 
 
+###How would I see all the Events I participated in and how would I see my fastest time?
+def search_by_swimmer_name(swimmer)
+  puts "Welcome to swim comparisons"
+  puts "Enter your name to begin!"
+  input = gets.chomp
+  swimmers = Swimmer.all
+  swimmers.find do |swimmer|
+    if swimmer.name == input
+      puts "Result: "
+      puts "\n Name: #{swimmer.name} | Age: #{swimmer.age} | Gender: #{swimmer.gender_string} "
+      swimmer_time = swimmer.swim_event_times.first
+      swimmer_event = swimmer_time.event
+      puts " Event: #{swimmer_event.name} Time: #{swimmer_time.time} seconds"
+      else
+        return
+    end
+  end
+end
+#search_by_swimmer_name
+#loops, gotta create loop break
+
+
 ##Return Swimmer's Event and Record Swim
 def get_params_for_name_update
 puts "Change display name?\n\n"
 puts "Input current name: "
 input = gets.chomp
-name = input
 
 puts "Input your new name:\n\n"
 new_input = gets.chomp
@@ -87,6 +59,7 @@ end
 
 
 def create_event()
+
   name = gets.chomp
   age = gets.chomp
   gender = gets.chomp
