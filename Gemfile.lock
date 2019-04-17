@@ -16,6 +16,7 @@ GEM
     coderay (1.1.1)
     concurrent-ruby (1.0.5)
     i18n (0.8.1)
+    io-console (0.4.7)
     method_source (0.8.2)
     minitest (5.10.1)
     pry (0.10.4)
@@ -45,6 +46,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  io-console
   pry
   rake
   require_all

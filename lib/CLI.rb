@@ -6,7 +6,10 @@ def input(value)
   value = self.input
   value
 end
-
+def confirm_submission
+  print "press any key to confirm"
+  STDIN.getch
+end
 def search_again_helper
   puts "Search again? (y/n):"
   input = gets.chomp
@@ -109,15 +112,60 @@ def create_event
   puts "Congratulations! You've created Event: #{name} | #{age} | #{gender}\n "
 end
 
+
+def event_list
+  events = Event.all
+#  binding.pry
+  events.each do |event|
+    event
+    puts "#{event.id}#{event.name}#{event.age}#{event.gender}"
+  end
+   end
+
+   #
+   #    event.events
+   #   if event == event.swim_event_times
+   #   event_swimmers = event. {|swimmer| swimmer.swimmer.name }
+   # puts "#{event_swimmers}"
+   # event
+   #    end
+      #event.swim_event_times == undef
+
+
+
+
+# end
+
+#    e_id = Event.first.id
+#   # e_swimmers = Event.first.swim_event_times
+#   Swimmer.find_by(id: e_id)
+#
+#   binding.pry
+#
+# Event.swim_event_times.find_all()
+#   counter = 1
+#   puts "Full Event List"
+#             Event.all.each do |event|
+#             event.swim_event_times.map |swimmers|
+#             # event.swim_event_times.all
+#             event_id = event.swim_event_times.swimmer_id
+#
+#             Event.find_by(id: swimmer_id)
+#
+#             event_participants.find_all do |event_participants|
+#             event_participants.swimmer.name
+#             end
+#            puts "#{counter}. #{event.id} #{event.name} #{event.age} #{event.gender} #{swimmers.swimmer.name} "
+#            counter += 1
+#          end
 def destroy_event
-  puts "target event name for deletion: "
-  name = gets.chomp
-  puts "target event age: "
-  age = gets.chomp
-  puts "target event gender: "
-  gender = gets.chomp
-  puts "ARE YOU SURE? Changes may be permanent."
-  target = Event.find_by(name: name, age: age, gender: gender)
+  puts "target event for deletion: "
+  event_id = gets.chomp
+  target = Event.find_by(id: event_id)
+binding.pry
+  # confirm_submission
+
   target.destroy
+  destroyed?(target)
   puts "Event: #{name} has been deleted."
 end
