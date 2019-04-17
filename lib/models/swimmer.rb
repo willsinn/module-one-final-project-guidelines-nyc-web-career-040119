@@ -3,6 +3,6 @@ class Swimmer < ActiveRecord::Base
   has_many :events, through: :swim_event_times
 
   def gender_string
-    self.gender ? "Male" : "Female"
+    self.gender ? "male" : "female"
   end
 end

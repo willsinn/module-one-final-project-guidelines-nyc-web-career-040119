@@ -115,12 +115,22 @@ end
 
 def event_list
   events = Event.all
-#  binding.pry
+
+  puts "\tCURRENT ACTIVE EVENTS TABLE"
   events.each do |event|
-    event
-    puts "#{event.id}#{event.name}#{event.age}#{event.gender}"
+    event = event
+    puts "__________________________________________________________\n"
+    puts "  id:#{event.id}  | name:#{event.name} |  age:#{event.age}  |  gender:#{event.gender}  "
   end
-   end
+  end
+
+def delete_event
+  event_swimmers = Event.find_by(id: 6)
+  if event_swimmers == event
+    puts "Awesome"
+  end
+
+end
 
    #
    #    event.events
@@ -163,7 +173,7 @@ def destroy_event
   event_id = gets.chomp
   target = Event.find_by(id: event_id)
 binding.pry
-  # confirm_submission
+   confirm_submission
 
   target.destroy
   destroyed?(target)
