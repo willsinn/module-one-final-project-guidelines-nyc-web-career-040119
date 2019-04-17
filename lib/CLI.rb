@@ -1,28 +1,29 @@
 ### Scrape Website and load db
 
  #helper
-
 def input(value)
   # until input(value).to_a.include?("quit")
   value = self.input
   value
 end
-def search_again
-  puts "Search again? (y/n): "
+
+def search_again_helper
+  puts "Search again? (y/n):"
   input = gets.chomp
   case input
   when "y"
-    puts "yes"
+    puts "____________________\nNew swimmer search:"
+    search_by_swimmer_name()
   when "n"
-    puts "no"
-  when "q"
-    puts "quit"
+    puts "...Ending Search."
+    main_menu()
   else
-    puts "Invalid Value"
+    puts "Invalid entry."
   end
 end
+
 def main_menu
-  puts "Welcome to SwimDB\n"
+  puts "\n\nSWIM DB MAIN-MENU\n"
   puts "1. Search for an existing Swimmer"
   puts "2. Update the name of an existing Swimmer"
   puts "3. Create new Event"
@@ -32,10 +33,10 @@ def main_menu
   input = gets.chomp.to_i
   case input
     when 1
-        puts "Search swimmer by name\n____________________"
+        puts "____________________\nSearch swimmer name:"
         search_by_swimmer_name()
     when 2
-        puts "Change Swimmer Name\n_____________________"
+        puts "____________________\nChange swimmer name:"
         get_params_for_name_update()
     when 3 then create_event()
     when 4 then destroy_event()
@@ -56,17 +57,13 @@ def search_by_swimmer_name
       puts "_______________________________________________________________________________________"
       puts "\t#{swimmer.name}\t \t#{swimmer.age}\t \t#{swimmer.gender_string}\t     #{swimmer_event.name}     #{swimmer_time.time_minutes}\t"
     end
-    search_again()
+    search_again_helper()
   end
   puts "No swimmer by that name."
-  search_again()
+  search_again_helper()
 end
 
 
-
-
-#search_by_swimmer_name
-#loops, gotta create loop break
 
 
 ##Return Swimmer's Event and Record Swim
