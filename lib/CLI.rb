@@ -2,20 +2,25 @@
 
  #helper
 def input(value)
+  # until input(value).to_a.include?("quit")
+
   value = self.input
   value
 end
+
 def main_menu
   puts "Welcome to SwimDB\n"
   puts "1. Search for an existing Swimmer"
   puts "2. Update the name of an existing Swimmer"
   puts "3. Create new Event"
   puts "4. Delete existing Event"
-  puts "\n\n"
-  input = gets.chomp
-  num = input.to_i
-  case num
-    when 1 then search_by_swimmer_name()
+  puts "\n"
+
+  input = gets.chomp.to_i
+  case input
+    when 1
+        puts "Search swimmer by name\n____________________"
+        search_by_swimmer_name()
     when 2
         puts "Change Swimmer Name\n_____________________"
         get_params_for_name_update()
@@ -27,8 +32,6 @@ def main_menu
 end
 ###How would I see all the Events I participated in and how would I see my fastest time?
 def search_by_swimmer_name
-  puts "Search for swimmer by name:"
-  puts "\n"
   input = gets.chomp
   swimmers = Swimmer.all
   swimmers.find do |swimmer|
@@ -39,11 +42,17 @@ def search_by_swimmer_name
       puts "|\tName\t  |\tAge\t|\tGender\t  | \tEvent\t   |\tTime\t|"
       puts "_______________________________________________________________________________________"
       puts "\t#{swimmer.name}\t \t#{swimmer.age}\t \t#{swimmer.gender_string}\t     #{swimmer_event.name}     #{swimmer_time.time_minutes}\t"
-      else
-        return
     end
   end
-end
+  puts "Search again? Input:(y/n)"
+    input = gets.chomp
+     input ? "y" : "n"
+     search_by_swimmer_name
+
+    puts "No swimmer by that name, try again."
+    end
+
+
 #search_by_swimmer_name
 #loops, gotta create loop break
 
@@ -69,11 +78,11 @@ def get_params_for_name_update
     puts "values are the same, try again."
     get_params_for_name_update()
   else
-    change_swimmer_name(input, new_input)
+    update_swimmer_name(input, new_input)
   end
 end
 
-def change_swimmer_name(name, new_name)
+def update_swimmer_name(name, new_name)
   swimmer = Swimmer.find_by(name: name)
   swimmer.update(name: new_name)
 end
