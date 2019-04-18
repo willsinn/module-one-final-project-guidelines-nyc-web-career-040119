@@ -121,7 +121,7 @@ def swimmer_domain
   puts "1. Create new Swimmer"
   puts "2. Search for an existing Swimmer"
   puts "3. Update the name of an existing Swimmer"
-  puts "4. Register swimmer to event, event id required"
+  puts "4. Register Swimmer to Event"
   puts "5. Main Menu"
   puts "\n"
   puts "***********************************************************"
@@ -155,15 +155,17 @@ def search_by_swimmer_name
         puts " **ERROR: no swimmer by that name.**"
         search_again_helper()
       end
-    registered_events = SwimEventTime.find_by(id: swimmer.id)
-    swimmer_event = Event.find_by(id: registered_events.event_id )
-
       puts " ***Search Result |=> "
       puts "_______________________________________________________________________________________"
-      puts "|\tName\t  |\tAge\t|\tGender\t  | \tEvent\t   |\tTime\t|"
+      puts " e_no.|   Name\t  |\tAge\t|\tGender\t  | \tEvent\t   |\tTime\t|"
+      puts "======================================================================================="
+      event_counter = 1
+      swimmer.swim_event_times.each do |swim_event|
+        swim_event
+        swim_event_name = Event.find_by(id:swim_event.id )
+      puts " #{event_counter}.\t#{swimmer.name}\t \t#{swimmer.age}\t \t#{swimmer.gender_s}\t     #{swim_event_name.name}     #{swim_event.time_minutes}\t"
       puts "_______________________________________________________________________________________"
-      puts "\t#{swimmer.name}\t \t#{swimmer.age}\t \t#{swimmer.gender_s}\t     #{swimmer_event.name}     #{registered_events.time_minutes}\t"
-      puts "_______________________________________________________________________________________"
+    end
       search_again_helper()
 end
 
@@ -247,7 +249,7 @@ def swimmer_events_qualifying_list
       puts "__________________________________________________________\n"
       puts " Event ID:#{qualified_event.id}   | name:#{qualified_event.name} | age:#{qualified_event.age} | gender:#{qualified_event.gender_e} |"
       puts "__________________________________________________________\n"
-      puts "**"
+      puts "************************"
 
     end
     register_swimmer_to_event()
@@ -273,7 +275,7 @@ def register_swimmer_to_event
   events = Event.all
   puts "Register swimmer to event:"
   puts "==========================="
-  puts " <=| enter swimmer name:"
+  puts " <=| enter swimmer id:"
   swimmer_id = gets.chomp
   puts " <=| enter event id:"
   event_id = gets.chomp
@@ -283,7 +285,7 @@ def register_swimmer_to_event
     end
   puts " <=| enter starting time:"
   time = gets.chomp
-  SwimEventTime.find_or_create_by(swimmer_id: swimmer_id, event_id: event_id, time: time)
-  puts " + success! swimmer registered: s_id:#{swimmer_id.name} | e_id:#{event_id.name} | t:#{time} |=>"
+  SwimEventTime.find_or_create_by(swimmer_id:swimmer_id, event_id:event_id, time:time )
+  puts " + success! swimmer registered: s_id:#{swimmer_id} | e_id:#{event_id} | t:#{time} |=>"
   swimmer_domain()
 end
