@@ -2,7 +2,6 @@
 
  #helper
 def input(value)
-  binding.pry
   # until input(value).to_a.include?("quit")
   value = self.input
   value
@@ -44,7 +43,8 @@ def main_menu
         create_event()
     when 4
         puts "____________________\nDelete an EMPTY swim event:"
-       destroy_event()
+        event_list()
+        destroy_event_swimmer_check()
      else
        puts "Invalid entry."
      end
@@ -60,7 +60,7 @@ def search_by_swimmer_name
       puts "Result: "
       puts "|\tName\t  |\tAge\t|\tGender\t  | \tEvent\t   |\tTime\t|"
       puts "_______________________________________________________________________________________"
-      puts "\t#{swimmer.name}\t \t#{swimmer.age}\t \t#{swimmer.gender_string}\t     #{swimmer_event.name}     #{swimmer_time.time_minutes}\t"
+      puts "\t#{swimmer.name}\t \t#{swimmer.age}\t \t#{swimmer.gender_s}\t     #{swimmer_event.name}     #{swimmer_time.time_minutes}\t"
     end
     search_again_helper()
   end
@@ -106,41 +106,39 @@ def create_event
   age = gets.chomp
   puts "event gender group: "
   gender = gets.chomp
-  Event.find_or_create_by(name: name, age: age, gender: gender)
+  Event.find_or_create_by(name: name, age: age, gender: gender).distinct
   puts "Congratulations! You've created Event: #{name} | #{age} | #{gender}\n "
 end
-
 
 def event_list
   events = Event.all
   puts "\tCURRENT ACTIVE EVENTS TABLE"
   events.each do |event|
-    event = event
+    event
     puts "__________________________________________________________\n"
-    puts "  id:#{event.id}  | name:#{event.name} |  age:#{event.age}  |  gender:#{event.gender}  "
+    puts "   id:#{event.id}   | name:#{event.name} | age:#{event.age} | gender:#{event.gender_e} |"
   end
-end
-
-def destroy_event_swimmer_check
-  puts "destroy target id:"
-  destroy_id = gets.chomp
-  bound_e_ids = SwimEventTime.all.map {|event_id| event_id.event_id}.uniq #array of event_ids w/ registered swimmers
-  bound_e_ids.find {|destroy_id| destroy_id } ? true : false #if
-
-  if true
-    puts "Event cannot be destroyed with swimmers registered.\nEnter another Event.id."
-    destroy_event_swimmer_check()
-  else false
-    destroy_event(destroy_id)
-  end
-
 end
 
 
 ###############################################################
 #DESTROY
 
-def destroy_event
+def destroy_event_swimmer_check
+  puts "Enter Event ID to destroy:"
+  destroy_id = gets.chomp.to_i
+  bound_e_ids = SwimEventTime.all.map {|event_id| event_id.event_id }.uniq #array of event_ids w/ registered swimmers
+  bound_e_ids.include?([destroy_id]) ? true : false
+    if true
+      puts "Event cannot be destroyed with swimmers registered.\nEnter another Event id."
+      destroy_event_swimmer_check()
+    elsif false
+      destroy_event(destroy_id)
+    end
+end
+
+
+def destroy_event(destroy_id)
   target = Event.find_by(id: destroy_id)
   confirm_destroy
   target.destroy

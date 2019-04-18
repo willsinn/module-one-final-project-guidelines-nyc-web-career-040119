@@ -4,7 +4,7 @@ require_relative '../config/environment'
 
 #input(list)
 
-#main_menu()
+main_menu()
 #search_by_swimmer_name()
 #get_params_for_name_update()
 #change_swimmer_name(name, new_name)

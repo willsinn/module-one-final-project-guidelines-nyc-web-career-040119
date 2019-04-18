@@ -2,7 +2,7 @@ class Swimmer < ActiveRecord::Base
   has_many :swim_event_times
   has_many :events, through: :swim_event_times
 
-  def gender_string
+  def gender_s
     self.gender ? "male" : "female"
   end
 
