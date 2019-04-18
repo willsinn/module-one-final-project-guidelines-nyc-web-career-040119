@@ -47,28 +47,25 @@ def main_menu
 ##Return Swimmer's Event and Record Swim
 def get_params_for_name_update
   puts "current name:"
-  input = gets.chomp
-  swimmers = Swimmer.all
-  swimmers.find do |swimmer|
-      if swimmer.name == input
-        input
-      else
-        puts "no swimmer by that name, try again."
-        get_params_for_name_update()
-      end
+  name = gets.chomp
+  swimmer = Swimmer.find_by(name: name)
+    if swimmer == nil
+      puts "No swimmer by that name, try again."
+      get_params_for_name_update()
     end
   puts "\nenter new name:"
-  new_input = gets.chomp
-  if 'name' == 'new_name'
-    puts "values are the same, try again."
-    get_params_for_name_update()
-  end
-  update_swimmer_name(input, new_input)
+  new_name = gets.chomp
+  update_swimmer_name(name, new_name)
 end
 
 def update_swimmer_name(name, new_name)
-  swimmer = Swimmer.find_by(name: name)
-  swimmer.update(name: new_name)
+  if name == new_name
+    binding.pry
+    puts "Values are the same, try again."
+    get_params_for_name_update()
+  end
+  swimmer_update = Swimmer.find_by(name: name)
+  swimmer_update.update(name: new_name)
 end
 
 def create_event
