@@ -16,10 +16,10 @@ require_relative '../config/environment'
 #create_event()
 #create_swimmer()
 #READ
-swimmer_events_age_gender_check()
+#swimmer_events_age_gender_check()
 
 #UPDATE
-
+swimmer_domain()
 
 #DESTROY
 #destroy_event_swimmer_check()
