@@ -5,4 +5,9 @@ class Swimmer < ActiveRecord::Base
   def gender_string
     self.gender ? "male" : "female"
   end
+
 end
+# Swimmer joining EVENTS
+# User.where(weekly_subscriber: true).find_each do |user|
+#   NewsMailer.weekly(user).deliver_now
+# end

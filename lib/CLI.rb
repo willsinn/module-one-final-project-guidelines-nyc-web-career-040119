@@ -2,6 +2,7 @@
 
  #helper
 def input(value)
+  binding.pry
   # until input(value).to_a.include?("quit")
   value = self.input
   value
@@ -112,14 +113,13 @@ end
 
 def event_list
   events = Event.all
-
   puts "\tCURRENT ACTIVE EVENTS TABLE"
   events.each do |event|
     event = event
     puts "__________________________________________________________\n"
     puts "  id:#{event.id}  | name:#{event.name} |  age:#{event.age}  |  gender:#{event.gender}  "
   end
-  end
+end
 
 def destroy_event_swimmer_check
   puts "destroy target id:"
