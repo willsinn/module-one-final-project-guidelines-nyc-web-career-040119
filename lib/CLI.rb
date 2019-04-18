@@ -2,24 +2,8 @@
 
  #helper
 def input(value)
-  # until input(value).to_a.include?("quit")
   value = self.input
   value
-end
-
-def search_again_helper
-  puts "\n\nSearch another swimmer? (y/n)\n(n)exit to main-menu"
-  input = gets.chomp
-  case input
-  when "y"
-    puts "____________________\nNew swimmer search:"
-    search_by_swimmer_name()
-  when "n"
-    puts "...Ending Search."
-    main_menu()
-  else
-    puts "Invalid entry."
-  end
 end
 
 def main_menu
@@ -54,22 +38,7 @@ def main_menu
      end
    end
 ###How would I see all the Events I participated in and how would I see my fastest time?
-def search_by_swimmer_name
-    swimmer_name = gets.chomp
-    swimmer = Swimmer.find_by(name: swimmer_name)
-      if swimmer == nil
-        puts "No swimmer by that name."
-        search_again_helper()
-      end
-    registered_events = SwimEventTime.find_by(id: swimmer.id)
-    swimmer_event = Event.find_by(id: registered_events.event_id )
 
-      puts "Result: "
-      puts "|\tName\t  |\tAge\t|\tGender\t  | \tEvent\t   |\tTime\t|"
-      puts "_______________________________________________________________________________________"
-      puts "\t#{swimmer.name}\t \t#{swimmer.age}\t \t#{swimmer.gender_s}\t     #{swimmer_event.name}     #{registered_events.time_minutes}\t"
-      search_again_helper()
-    end
 
 
 
@@ -125,7 +94,88 @@ end
 
 
 ###############################################################
-#DESTROY
+###################SWIMMER DOMAIN
+
+def swimmer_domain
+  puts "all things swimmer"
+  puts "1. Create new Swimmer"
+  puts "2. Search for an existing Swimmer"
+  puts "3. Update the name of an existing Swimmer"
+  puts "4. Lists events where swimmer is age & gender qualified "
+  puts "5. Register swimmer to event, event id required"
+  puts "6. Main Menu"
+  puts "\n"
+
+  input = gets.chomp.to_i
+  case input
+    when 1
+        puts "____________________\nCreate new swimmer:"
+        create_swimmer()
+    when 2
+        puts "____________________\nSearch existing swimmer: "
+        search_by_swimmer_name()
+    when 3
+        puts "____________________\nChange existing swimmer name: "
+        get_params_for_name_update()
+    when 4
+        puts "____________________\nCreate new swim event: "
+        swimmer_events_qualifying_list()
+    when 5
+        puts "____________________\nRegister swimmer to event: "
+        register_swimmer_to_event()
+    when 6
+        main_menu()
+     else
+       puts "Invalid entry."
+       swimmer_domain()
+    end
+end
+############# SWIMMER SEARCH
+
+def search_by_swimmer_name
+    swimmer_name = gets.chomp
+    swimmer = Swimmer.find_by(name: swimmer_name)
+      if swimmer == nil
+        puts "No swimmer by that name."
+        search_again_helper()
+      end
+    registered_events = SwimEventTime.find_by(id: swimmer.id)
+    swimmer_event = Event.find_by(id: registered_events.event_id )
+
+      puts "Result: "
+      puts "|\tName\t  |\tAge\t|\tGender\t  | \tEvent\t   |\tTime\t|"
+      puts "_______________________________________________________________________________________"
+      puts "\t#{swimmer.name}\t \t#{swimmer.age}\t \t#{swimmer.gender_s}\t     #{swimmer_event.name}     #{registered_events.time_minutes}\t"
+      search_again_helper()
+end
+
+def search_again_helper
+  puts "\n\nSearch another swimmer? (y/n)\n(n)exit to main-menu"
+  input = gets.chomp
+  case input
+  when "y"
+    puts "____________________\nNew swimmer search:"
+    search_by_swimmer_name()
+  when "n"
+    puts "...Ending Search."
+    main_menu()
+  else
+    puts "Invalid entry."
+  end
+end
+##############################################
+#CREATE SWIMMER
+
+def create_swimmer
+  puts "new swimmer name: "
+  name = gets.chomp
+  puts "swimmer age group: "
+  age = gets.chomp
+  puts "swimmer gender group: "
+  gender = gets.chomp
+  Swimmer.find_or_create_by(name: name, age: age, gender: gender)
+  puts "Congratulations! You've created a new Swimmer: #{name} | #{age} | #{gender}\n "
+end
 
 def destroy_event_swimmer_check
   puts "\n\nEnter Event ID to destroy:"
@@ -152,18 +202,6 @@ def confirm_destroy
   STDIN.getch
 end
 
-##############################################
-#CREATE SWIMMER
-def create_swimmer
-  puts "new swimmer name: "
-  name = gets.chomp
-  puts "swimmer age group: "
-  age = gets.chomp
-  puts "swimmer gender group: "
-  gender = gets.chomp
-  Swimmer.find_or_create_by(name: name, age: age, gender: gender)
-  puts "Congratulations! You've created a new Swimmer: #{name} | #{age} | #{gender}\n "
-end
 
 def register_swimmer_to_event
   puts "swimmer name:"
@@ -205,38 +243,3 @@ def swimmer_check_loop
     puts "Invalid entry."
   end
 end
-
-def swimmer_domain
-  puts "all things swimmer"
-  puts "1. Create new Swimmer"
-  puts "2. Search for an existing Swimmer"
-  puts "3. Update the name of an existing Swimmer"
-  puts "4. Lists events where swimmer is age & gender qualified "
-  puts "5. Register swimmer to event, event id required"
-  puts "6. Main Menu"
-  puts "\n"
-
-  input = gets.chomp.to_i
-  case input
-    when 1
-        puts "____________________\nCreate new swimmer:"
-        create_swimmer()
-    when 2
-        puts "____________________\nSearch existing swimmer: "
-        search_by_swimmer_name()
-    when 3
-        puts "____________________\nChange existing swimmer name: "
-        get_params_for_name_update()
-    when 4
-        puts "____________________\nCreate new swim event: "
-        swimmer_events_qualifying_list()
-    when 5
-        puts "____________________\nRegister swimmer to event: "
-        register_swimmer_to_event()
-    when 6
-        main_menu()
-     else
-       puts "Invalid entry."
-       swimmer_domain()
-     end
-   end
