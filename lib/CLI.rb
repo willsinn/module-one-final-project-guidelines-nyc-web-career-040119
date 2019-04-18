@@ -106,7 +106,7 @@ def create_event
   age = gets.chomp
   puts "event gender group: "
   gender = gets.chomp
-  Event.find_or_create_by(name: name, age: age, gender: gender).distinct
+  Event.find_or_create_by(name: name, age: age, gender: gender)
   puts "Congratulations! You've created Event: #{name} | #{age} | #{gender}\n "
 end
 
@@ -125,16 +125,15 @@ end
 #DESTROY
 
 def destroy_event_swimmer_check
-  puts "Enter Event ID to destroy:"
-  destroy_id = gets.chomp.to_i
+  puts "\n\nEnter Event ID to destroy:"
   bound_e_ids = SwimEventTime.all.map {|event_id| event_id.event_id }.uniq #array of event_ids w/ registered swimmers
-  bound_e_ids.include?([destroy_id]) ? true : false
-    if true
-      puts "Event cannot be destroyed with swimmers registered.\nEnter another Event id."
-      destroy_event_swimmer_check()
-    elsif false
-      destroy_event(destroy_id)
+  destroy_id = gets.chomp.to_i
+  check = bound_e_ids.include?(destroy_id) ? "y" : "n"
+  binding.pry
+    if 'check' == "y"
+      puts "dont destroy"
     end
+    puts "destroy"
 end
 
 
@@ -142,7 +141,7 @@ def destroy_event(destroy_id)
   target = Event.find_by(id: destroy_id)
   confirm_destroy
   target.destroy
-  puts "Event: #{name} has been deleted."
+  puts "Event: #{id} has been deleted."
 end
 
 def confirm_destroy
