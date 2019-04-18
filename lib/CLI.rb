@@ -2,7 +2,7 @@
 
  #helper
 def start
-  puts "  Welcome to Swim-Meet-DB.\nMeet management made easy!"
+  puts "\n Welcome to Swim-Meet-DB.\n Meet management made easy!"
   main_menu()
 end
 
@@ -13,32 +13,37 @@ end
 #######################################
 ############ MAIN
 def main_menu
-  puts "\n\nswim-meet-DB: main-menu"
+  puts "***********************************************************"
+  puts "swim-meet-DB: main-menu"
   puts "\n"
   puts "1. Swimmer management console"
   puts "2. List active events "
   puts "3. Create new event"
   puts "4. Delete an empty event"
   puts "\n"
+  puts "***********************************************************"
+
 
   input = gets.chomp.to_i
   case input
     when 1
-        puts "____________________\n"
+        puts "***********************************************************"
         swimmer_domain()
     when 2
-        puts "____________________\n"
+        puts "___________________________________________________________"
         event_list()
     when 3
-        puts "____________________\nCreate new swim event:"
+        puts "___________________________________________________________\nCreate new swim event:"
         create_event()
     when 4
-        puts "____________________\nDelete an EMPTY swim event:"
+        puts "___________________________________________________________\nDelete an EMPTY swim event:"
         event_list()
         destroy_event_swimmer_check()
      else
        puts "Invalid entry."
      end
+     main_menu()
+
    end
 ###How would I see all the Events I participated in and how would I see my fastest time?
 
@@ -107,6 +112,7 @@ end
 ###################SWIMMER DOMAIN
 
 def swimmer_domain
+  puts "***********************************************************"
   puts "Swimmer Console:"
   puts "\n"
   puts "1. Create new Swimmer"
@@ -116,30 +122,30 @@ def swimmer_domain
   puts "5. Register swimmer to event, event id required"
   puts "6. Main Menu"
   puts "\n"
-
+  puts "***********************************************************"
   input = gets.chomp.to_i
   case input
     when 1
-        puts "____________________\nCreate new swimmer:"
+        puts "__________________________________________________________\nCreate new swimmer:"
         create_swimmer()
     when 2
-        puts "____________________\nSearch existing swimmer: "
+        puts "__________________________________________________________\nSearch existing swimmer: "
         search_by_swimmer_name()
     when 3
-        puts "____________________\nChange existing swimmer name: "
+        puts "__________________________________________________________\nChange existing swimmer name: "
         get_params_for_name_update()
     when 4
-        puts "____________________\nCreate new swim event: "
+        puts "__________________________________________________________\nCreate new swim event: "
         swimmer_events_qualifying_list()
     when 5
-        puts "____________________\nRegister swimmer to event: "
+        puts "__________________________________________________________\nRegister swimmer to event: "
         register_swimmer_to_event()
     when 6
         main_menu()
-     else
+    else
        puts "Invalid entry."
-       swimmer_domain()
     end
+    swimmer_domain()
 end
 ############# SWIMMER SEARCH
 
