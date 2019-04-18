@@ -1,6 +1,6 @@
 require_relative '../config/environment'
 #ActiveRecord::Base.logger = false
-#main_menu()
+start()#main_menu()
 
 #event_list()
 
@@ -19,7 +19,7 @@ require_relative '../config/environment'
 #swimmer_events_age_gender_check()
 
 #UPDATE
-swimmer_domain()
+#swimmer_domain()
 
 #DESTROY
 #destroy_event_swimmer_check()
