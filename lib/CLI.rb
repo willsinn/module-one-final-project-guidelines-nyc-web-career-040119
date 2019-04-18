@@ -118,10 +118,10 @@ def swimmer_domain
   puts "***********************************************************"
   puts "Swimmer Console:"
   puts "\n"
-  puts "1. Create new Swimmer"
-  puts "2. Search for an existing Swimmer"
+  puts "1. Create new a Swimmer"
+  puts "2. Search by Swimmer name for all registered Events"
   puts "3. Update the name of an existing Swimmer"
-  puts "4. Register Swimmer to Event"
+  puts "4. Register Swimmer to an existing Event"
   puts "5. Main Menu"
   puts "\n"
   puts "***********************************************************"
@@ -288,4 +288,9 @@ def register_swimmer_to_event
   SwimEventTime.find_or_create_by(swimmer_id:swimmer_id, event_id:event_id, time:time )
   puts " + success! swimmer registered: s_id:#{swimmer_id} | e_id:#{event_id} | t:#{time} |=>"
   swimmer_domain()
+end
+
+# UPDATE SWIMMER EVENT CURRENTLY REGISTERED TO
+def swimmer_update_registered_event
+  
 end
