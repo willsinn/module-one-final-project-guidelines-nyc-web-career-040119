@@ -6,15 +6,18 @@ def start
   main_menu()
 end
 
-def input(value)
+def input
   value = self.input
   value
+  if value == "q"
+    return
+  end
 end
 #######################################
 ############ MAIN
 def main_menu
   puts "***********************************************************"
-  puts "swim-meet-DB: main-menu"
+  puts "SM-DB: Main-Menu"
   puts "\n"
   puts "1. Swimmer management console"
   puts "2. List active events "
@@ -55,14 +58,14 @@ def main_menu
 ##Return Swimmer's Event and Record Swim
 
 def create_event
-  puts "new event name: "
+  puts " <=| new event name: "
   name = gets.chomp
-  puts "event age group: "
+  puts " <=| event age group: "
   age = gets.chomp
-  puts "event gender group: "
+  puts " <=| event gender group: "
   gender = gets.chomp
   Event.find_or_create_by(name: name, age: age, gender: gender)
-  puts "Congratulations! You've created Event: #{name} | #{age} | #{gender}\n "
+  puts " + success! event created: #{name} | #{age} | #{gender}\n "
 end
 
 def event_list
@@ -95,7 +98,7 @@ def destroy_event(destroy_id)
   target = Event.find_by(id: destroy_id)
   confirm_destroy
   target.destroy
-  puts "Event: #{id} has been deleted."
+  puts " + success! event deleted: #{id} |=>"
 end
 
 def confirm_destroy
@@ -125,21 +128,21 @@ def swimmer_domain
   input = gets.chomp.to_i
   case input
     when 1
-        puts "__________________________________________________________\nCreate new swimmer:"
+        puts "Create new swimmer:\n==================="
         create_swimmer()
     when 2
-        puts "__________________________________________________________\nSearch existing swimmer: "
+        puts "Search existing swimmer:\n======================="
         search_by_swimmer_name()
     when 3
-        puts "__________________________________________________________\nChange existing swimmer name: "
+        puts "Change existing swimmer name:\n==========================="
         get_params_for_name_update()
     when 4
-        puts "__________________________________________________________\nRegister swimmer to qualifying event: "
+        puts "Register swimmer to qualifying event:\n================================="
         swimmer_events_qualifying_list()
     when 5
         main_menu()
     else
-       puts "Invalid entry."
+       puts " **ERROR: invalid entry.**"
     end
     swimmer_domain()
 end
@@ -149,45 +152,48 @@ def search_by_swimmer_name
     swimmer_name = gets.chomp
     swimmer = Swimmer.find_by(name: swimmer_name)
       if swimmer == nil
-        puts "No swimmer by that name."
+        puts " **ERROR: no swimmer by that name.**"
         search_again_helper()
       end
     registered_events = SwimEventTime.find_by(id: swimmer.id)
     swimmer_event = Event.find_by(id: registered_events.event_id )
 
-      puts "Result: "
+      puts " ***Search Result |=> "
+      puts "_______________________________________________________________________________________"
       puts "|\tName\t  |\tAge\t|\tGender\t  | \tEvent\t   |\tTime\t|"
       puts "_______________________________________________________________________________________"
       puts "\t#{swimmer.name}\t \t#{swimmer.age}\t \t#{swimmer.gender_s}\t     #{swimmer_event.name}     #{registered_events.time_minutes}\t"
+      puts "_______________________________________________________________________________________"
       search_again_helper()
 end
 
 def search_again_helper
-  puts "\n\nSearch another swimmer? (y/n)\n(n)exit to main-menu"
+  puts " <=| search again? (y/n)\n(n) exits to main-menu"
   input = gets.chomp
   case input
   when "y"
-    puts "____________________\nNew swimmer search:"
+    puts "================\nswimmer search:"
     search_by_swimmer_name()
   when "n"
-    puts "...Ending Search."
+    puts "...ending search."
     main_menu()
   else
-    puts "Invalid entry."
+    puts " **ERROR: invalid entry.**"
   end
 end
 ##############################################
 #CREATE SWIMMER
 
 def create_swimmer
-  puts "new swimmer name: "
+  puts " <=| new swimmer name: "
   name = gets.chomp
-  puts "swimmer age group: "
+  puts " <=| swimmer age group: "
   age = gets.chomp
-  puts "swimmer gender group: "
+  puts " <=| swimmer gender group: "
   gender = gets.chomp
   Swimmer.find_or_create_by(name: name, age: age, gender: gender)
-  puts "Congratulations! You've created a new Swimmer: #{name} | #{age} | #{gender}\n "
+  puts "  + success! swimmer created: #{name} | #{age} | #{gender} |=> "
+  swimmer_domain()
 end
 ################################################
 ## UPDATE SWIMMER NAME
@@ -196,10 +202,10 @@ def get_params_for_name_update
   name = gets.chomp
   swimmer = Swimmer.find_by(name: name)
     if swimmer == nil
-      puts "No swimmer by that name, try again."
+      puts " **ERROR: no swimmer by that name, try again.**"
       get_params_for_name_update()
     end
-  puts "\nenter new name:"
+  puts " <=| new name:"
   new_name = gets.chomp
   update_swimmer_name(name, new_name)
 end
@@ -212,7 +218,8 @@ def update_swimmer_name(name, new_name)
   end
   swimmer_update = Swimmer.find_by(name: name)
   swimmer_update.update(name: new_name)
-  puts "Swimmer Name: #{name} has been changed to #{new_name}"
+  puts "  + success! swimmer name:'#{name}', changed to: '#{new_name}' |=> "
+  swimmer_domain()
 end
 
 ####################################################
@@ -222,53 +229,61 @@ end
 #SWIMMER EVENT LIST
 
 def swimmer_events_qualifying_list
-  puts "Input swimmer name for qualifying events: "
+  puts " <=| enter swimmer for qualifying events: "
   name = gets.chomp
   swimmer = Swimmer.find_by(name: name)
     if swimmer == nil
-      puts "No swimmer by that name, try again."
+      puts "**ERROR: No swimmer by that name, try again.**"
       swimmer_events_qualifying_list()
     end
-  puts " Swimmer:  |  Name:#{swimmer.name}  |  Age:#{swimmer.age}  |  Gender:#{swimmer.gender_s}"
-  swimmer_check_loop()
-  events = Event.all
-  qualified_events = events.where({ age: swimmer.age, gender: swimmer.gender })
-  qualified_events.each do |qualified_event|
+    puts "__________________________________________________________\n"
+    puts " Swimmer ID:#{swimmer.id}  |  Name:#{swimmer.name}  |  Age:#{swimmer.age}  |  Gender:#{swimmer.gender_s}"
+    puts "__________________________________________________________\n"
+    swimmer_check_loop()
+    events = Event.all
+    qualified_events = events.where({ age: swimmer.age, gender: swimmer.gender })
+    qualified_events.each do |qualified_event|
       qualified_event
       puts "__________________________________________________________\n"
-      puts "   id:#{qualified_event.id}   | name:#{qualified_event.name} | age:#{qualified_event.age} | gender:#{qualified_event.gender_e} |"
+      puts " Event ID:#{qualified_event.id}   | name:#{qualified_event.name} | age:#{qualified_event.age} | gender:#{qualified_event.gender_e} |"
+      puts "__________________________________________________________\n"
+      puts "**"
+
     end
     register_swimmer_to_event()
 end
 
 def swimmer_check_loop
-  puts "Is this you? (y/n):"
+  puts " <=| Is this you? (y/n):"
   input = gets.chomp
   case input
   when "y"
     STDIN.getch
   when "n"
-    puts "____________________\nNew swimmer search:"
+    puts "New swimmer search:"
+    puts "===================="
     swimmer_events_qualifying_list()
   else
-    puts "Invalid entry."
+    puts " **ERROR: invalid entry.**"
   end
 end
 
 # REGISTER SWIMMER TO EVENT
 def register_swimmer_to_event
   events = Event.all
-  puts "Register swimmer to event:\n________________________________________"
-  puts "enter swimmer name:"
-  swimmer = gets.chomp
-  puts "enter event id:"
+  puts "Register swimmer to event:"
+  puts "==========================="
+  puts " <=| enter swimmer name:"
+  swimmer_id = gets.chomp
+  puts " <=| enter event id:"
   event_id = gets.chomp
     if events.include?(event_id)
-      puts "You are already registered to this event. Try again."
+      puts " **ERROR: already registered, try another event**"
       register_swimmer_to_event()
     end
-  puts "enter starting time:"
+  puts " <=| enter starting time:"
   time = gets.chomp
-  SwimEventTime.find_or_create_by(swimmer: swimmer, event_id: event_id, time: time)
-  puts "Congratulations! #{swimmer} has been registered to Event #{event_id} with starting time: #{time}\n "
+  SwimEventTime.find_or_create_by(swimmer_id: swimmer_id, event_id: event_id, time: time)
+  puts " + success! swimmer registered: s_id:#{swimmer_id.name} | e_id:#{event_id.name} | t:#{time} |=>"
+  swimmer_domain()
 end
