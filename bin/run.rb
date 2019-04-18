@@ -1,10 +1,11 @@
 require_relative '../config/environment'
 #ActiveRecord::Base.logger = false
+#main_menu()
+
 #event_list()
 
 #input(list)
 
-main_menu()
 #search_by_swimmer_name()
 #get_params_for_name_update()
 #change_swimmer_name(name, new_name)
@@ -13,9 +14,9 @@ main_menu()
 
 #CREATE
 #create_event()
-
+#create_swimmer()
 #READ
-
+swimmer_events_age_gender_check()
 
 #UPDATE
 

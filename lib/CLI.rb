@@ -25,9 +25,10 @@ end
 def main_menu
   puts "\n\nSWIM DB MAIN-MENU\n"
   puts "1. Search for an existing Swimmer"
-  puts "2. Update the name of an existing Swimmer"
-  puts "3. Create new Event"
-  puts "4. Delete existing Event"
+  puts "2. Create new Swimmer"
+  puts "3. Update the name of an existing Swimmer"
+  puts "4. Create new Event"
+  puts "5. Delete existing Event"
   puts "\n"
 
   input = gets.chomp.to_i
@@ -36,12 +37,15 @@ def main_menu
         puts "____________________\nSearch swimmer name:"
         search_by_swimmer_name()
     when 2
+        puts "____________________\nCreate new swimmer:"
+        create_swimmer()
+    when 3
         puts "____________________\nChange swimmer name:"
         get_params_for_name_update()
-    when 3
+    when 4
         puts "____________________\nCreate new swim event:"
         create_event()
-    when 4
+    when 5
         puts "____________________\nDelete an EMPTY swim event:"
         event_list()
         destroy_event_swimmer_check()
@@ -129,11 +133,11 @@ def destroy_event_swimmer_check
   bound_e_ids = SwimEventTime.all.map {|event_id| event_id.event_id }.uniq #array of event_ids w/ registered swimmers
   destroy_id = gets.chomp.to_i
   check = bound_e_ids.include?(destroy_id) ? "y" : "n"
-  binding.pry
-    if 'check' == "y"
-      puts "dont destroy"
+    if check == "y"
+      puts "Can't destroy with Swimmers registered."
+      main_menu()
     end
-    puts "destroy"
+    destroy_event(destroy_id)
 end
 
 
@@ -147,4 +151,58 @@ end
 def confirm_destroy
   print "CONFIRM DESTROY?\nACTION MAY BE PERMANENT"
   STDIN.getch
+end
+
+##############################################
+#CREATE SWIMMER
+def create_swimmer
+  puts "new swimmer name: "
+  name = gets.chomp
+  puts "swimmer age group: "
+  age = gets.chomp
+  puts "swimmer gender group: "
+  gender = gets.chomp
+  Swimmer.find_or_create_by(name: name, age: age, gender: gender)
+  puts "Congratulations! You've created a new Swimmer: #{name} | #{age} | #{gender}\n "
+end
+
+def register_swimmer_to_event
+  puts "swimmer name:"
+  swimmer = gets.chomp
+  puts "event id:"
+  event_id = gets.chomp
+  puts "starting time:"
+  time = gets.chomp
+  SwimEventTime.find_or_create_by(swimmer: swimmer, event_id: event_id, time: time)
+  puts "Congratulations! #{swimmer} has been registered to Event #{event_id} with starting time: #{time}\n "
+end
+
+def swimmer_events_age_gender_check
+  puts "Input swimmer name for qualified events: "
+  name = gets.chomp
+#  search_by_swimmer_name(name)
+  swimmer = Swimmer.find_by(name: name)
+  puts "#{swimmer.name} #{swimmer.age} #{swimmer.gender}"
+  swimmer_check_loop()
+  events = Event.all
+  qualified_events = events.where({ age: swimmer.age, gender: swimmer.gender })
+  qualified_events.each do |qualified_event|
+      qualified_event
+      puts "__________________________________________________________\n"
+      puts "   id:#{qualified_event.id}   | name:#{qualified_event.name} | age:#{qualified_event.age} | gender:#{qualified_event.gender_e} |"
+    end
+end
+
+def swimmer_check_loop
+  puts "Is this you? (y/n):"
+  input = gets.chomp
+  case input
+  when "y"
+    STDIN.getch
+  when "n"
+    puts "____________________\nNew swimmer search:"
+    swimmer_events_age_gender_check()
+  else
+    puts "Invalid entry."
+  end
 end
