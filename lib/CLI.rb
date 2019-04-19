@@ -1,5 +1,6 @@
 ### Scrape Website and load db
  #helper
+
 def start
   puts "\n Welcome to Swim-Meet-DB.\n Meet management made easy!"
   main_menu()
@@ -13,12 +14,11 @@ end
 ############ MAIN
 def main_menu
   puts "***********************************************************"
-  puts "SM-DB: Main-Menu"
-  puts "\n"
-  puts "1. Swimmer management console"
-  puts "2. List active events "
-  puts "3. Create new event"
-  puts "4. Delete an empty event"
+  puts "  SM-DB: Main-Menu".colorize(:cyan).bold
+  puts " 1. Swimmer management console"
+  puts " 2. List active events "
+  puts " 3. Create new event"
+  puts " 4. Delete an empty event"
   puts "\n"
   puts "***********************************************************"
 

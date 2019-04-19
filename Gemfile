@@ -7,5 +7,6 @@ gem "sinatra-activerecord"
 gem "sqlite3"
 gem "pry"
 gem "rake"
-gem 'io-console'
+gem "io-console"
+gem "colorize"
 gem "require_all"
