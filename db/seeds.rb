@@ -43,17 +43,22 @@ bk_f_15=Event.find_or_create_by(name: "200 Backstroke", age: 15 , gender: 'F')
 br_f_15=Event.find_or_create_by(name: "200 Breaststroke", age: 15 , gender: 'F')
 
 #MALE with multiple Events
-SwimEventTime.find_or_create_by(swimmer: robert, event: free200, time: 115 )
-SwimEventTime.find_or_create_by(swimmer: robert, event: free200, time: 115 )
-SwimEventTime.find_or_create_by(swimmer: robert, event: free200, time: 115 )
-SwimEventTime.find_or_create_by(swimmer: robert, event: free200, time: 115 )
+SwimEventTime.find_or_create_by(swimmer: robert, event: fy_m_16, time: 110 )
+SwimEventTime.find_or_create_by(swimmer: robert, event: fr_m_16, time: 116 )
+SwimEventTime.find_or_create_by(swimmer: robert, event: bk_m_16, time: 121 )
+SwimEventTime.find_or_create_by(swimmer: robert, event: br_m_16, time: 111 )
 
-SwimEventTime.find_or_create_by(swimmer: darren, event: free200, time: 127 )
-SwimEventTime.find_or_create_by(swimmer: darren, event: free200, time: 127 )
-SwimEventTime.find_or_create_by(swimmer: darren, event: free200, time: 127 )
-SwimEventTime.find_or_create_by(swimmer: darren, event: free200, time: 127 )
+SwimEventTime.find_or_create_by(swimmer: sam, event: fy_m_15, time: 110 )
+SwimEventTime.find_or_create_by(swimmer: sam, event: fr_m_15, time: 140 )
+SwimEventTime.find_or_create_by(swimmer: sam, event: bk_m_15, time: 121 )
+SwimEventTime.find_or_create_by(swimmer: sam, event: br_m_15, time: 136 )
 
+SwimEventTime.find_or_create_by(swimmer: lucy, event: fy_f_16, time: 123 )
+SwimEventTime.find_or_create_by(swimmer: lucy, event: fr_f_16, time: 116 )
+SwimEventTime.find_or_create_by(swimmer: lucy, event: bk_f_16, time: 121 )
+SwimEventTime.find_or_create_by(swimmer: lucy, event: br_f_16, time: 111 )
 
-
-SwimEventTime.find_or_create_by(swimmer: diana, event: butterfly100, time: 64 )
-SwimEventTime.find_or_create_by(swimmer: sophie, event: butterfly100, time: 70 )
+SwimEventTime.find_or_create_by(swimmer: leslie, event: fy_f_15, time: 130 )
+SwimEventTime.find_or_create_by(swimmer: leslie, event: fr_f_15, time: 140 )
+SwimEventTime.find_or_create_by(swimmer: leslie, event: bk_f_15, time: 121 )
+SwimEventTime.find_or_create_by(swimmer: leslie, event: br_f_15, time: 136 )
