@@ -1,8 +1,8 @@
 require_relative '../config/environment'
-ActiveRecord::Base.logger = false
+#ActiveRecord::Base.logger = false
 
 
-start()
+#start()
 
 
 

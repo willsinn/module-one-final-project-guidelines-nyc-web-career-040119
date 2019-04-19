@@ -1,5 +1,4 @@
 ### Scrape Website and load db
-
  #helper
 def start
   puts "\n Welcome to Swim-Meet-DB.\n Meet management made easy!"
@@ -9,9 +8,6 @@ end
 def input
   value = self.input
   value
-  if value == "q"
-    return
-  end
 end
 #######################################
 ############ MAIN
@@ -156,15 +152,16 @@ def search_by_swimmer_name
         search_again_helper()
       end
       puts " ***Search Result |=> "
-      puts "_______________________________________________________________________________________"
-      puts " e_no.|   Name\t  |\tAge\t|\tGender\t  | \tEvent\t   |\tTime\t|"
+      puts "======================================================================================="
+      puts "  #{swimmer.name}  |  id:#{swimmer.id}  |   n:#{swimmer.name}   |   a:#{swimmer.age}  |   g:#{swimmer.gender_s}"
       puts "======================================================================================="
       event_counter = 1
       swimmer.swim_event_times.each do |swim_event|
         swim_event
         swim_event_name = Event.find_by(id:swim_event.id )
-      puts " #{event_counter}.\t#{swimmer.name}\t \t#{swimmer.age}\t \t#{swimmer.gender_s}\t     #{swim_event_name.name}     #{swim_event.time_minutes}\t"
+      puts "event #{event_counter}.| id:#{swim_event_name.id}  |  n:#{swim_event_name.name}  |  a:#{swim_event_name.age}  |  t:#{swim_event.time_minutes}  |"
       puts "_______________________________________________________________________________________"
+      event_counter += 1
     end
       search_again_helper()
 end
@@ -219,7 +216,7 @@ def update_swimmer_name(name, new_name)
     get_params_for_name_update()
   end
   swimmer_update = Swimmer.find_by(name: name)
-  swimmer_update.update(name: new_name)
+  swimmer_update.update!(name: new_name)
   puts "  + success! swimmer name:'#{name}', changed to: '#{new_name}' |=> "
   swimmer_domain()
 end
@@ -292,5 +289,64 @@ end
 
 # UPDATE SWIMMER EVENT CURRENTLY REGISTERED TO
 def swimmer_update_registered_event
-  
+    puts "Search swimmer by name:"
+    swimmer_name = gets.chomp
+    swimmer = Swimmer.find_by(name: swimmer_name)
+      if swimmer == nil
+        puts " **ERROR: no swimmer by that name.**"
+        swimmer_update_registered_event()
+      end
+      puts " ***Search Result |=> "
+      puts "======================================================================================="
+      puts " Event.ids |   #{swimmer.name}   |    age:#{swimmer.age}   |   gender:#{swimmer.gender_s}"
+      puts "======================================================================================="
+      event_counter = 1
+      swimmer.swim_event_times.each do |swim_event|
+        swim_event
+        swim_event_name = Event.find_by(id:swim_event.id)
+      puts "  ID:#{swim_event.id}  |  n:#{swim_event_name.name}  |  a:#{swim_event_name.age}  |  t:#{swim_event.time_minutes}  |"
+      puts "_______________________________________________________________________________________"
+      event_counter += 1
+    end
+    puts " Update registered event:"
+    puts " <=| current event id:"
+    current_id = gets.chomp
+    reg_events = SwimEventTime.find_by(id:current_id)
+
+    current_event = Event.find_by(id:reg_events.event_id)
+    puts "Change #{current_event.name}, #{current_event.age}, #{current_event.gender_e} to another event? "
+    puts "*********************************************"
+    puts "Events within #{swimmer.name}'s' age-gender limitations: "
+    events = Event.all
+    qualified_events = events.where({ age: swimmer.age, gender: swimmer.gender })
+        qualified_events.each do |qualified_event|
+          qualified_event
+          puts "__________________________________________________________\n"
+          puts " Event ID:#{qualified_event.id}   | name:#{qualified_event.name} | age:#{qualified_event.age} | gender:#{qualified_event.gender_e} |"
+          puts "__________________________________________________________\n"
+        puts "************************"
+    end
+
+
+    puts " <=| target event id:"
+    target_id = gets.chomp
+    reg_events.update!(event_id: target_id)
+
+    target_event = Event.find_by(id:target_id)
+    puts " + success! event #{current_event.name} has been changed to #{target_event.name}! |=>"
+    swimmer_event_update_confirm()
+    swimmer_domain()
+end
+
+def swimmer_event_update_confirm
+  puts " continue? (y/n)"
+  input = gets.chomp
+  case input
+  when "y"
+    return
+  when "n"
+    swimmer_domain()
+  else
+    puts " **ERROR: invalid entry.**"
+  end
 end
